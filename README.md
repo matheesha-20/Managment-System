@@ -3,5 +3,6 @@
 This is a Management System (POS) not only focusing on a one stream it can be use in a any industry as user wants it's a customisable application.
 
 TECHNOLOGIES HAVE USED.
+
 .JAVAfx
 
