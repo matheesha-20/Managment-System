@@ -4,5 +4,5 @@ This is a Management System (POS) not only focusing on a one stream it can be us
 
 TECHNOLOGIES HAVE USED.
 
-.JAVAfx
+JAVAfx
 
