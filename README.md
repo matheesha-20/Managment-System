@@ -1,8 +1,7 @@
 ![download](https://github.com/user-attachments/assets/a1697851-949f-4ccb-90b7-c7565ddecd68)
-![unnamed](https://github.com/user-attachments/assets/178199cc-d6e2-4d4c-8270-e24a5fc74082)
 
 This is a Management System (POS) not only focusing on a one stream it can be use in a any industry as user wants it's a customisable application.
 
-TECHNOLOGIES HAV USE.
+TECHNOLOGIES HAVE USED.
 .JAVAfx
 
