@@ -1,10 +1,22 @@
 package model;
 
+
+import lombok.*;
+
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+
 public class Customer {
-    public String id;
-    public String name;
-    public String email;
-    public String phone;
-    public String address;
+
+
+    private String id;
+    private String name;
+    private String email;
+    private String phone;
+    private String address;
+    private int loyalpoints;
 
 }

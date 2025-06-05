@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="618.0" prefWidth="1046.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Resrvationcontroller">
+
+    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dededc" height="548.0" layoutY="70.0" stroke="BLACK" strokeType="INSIDE" width="1048.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#04144b" height="32.0" layoutX="-1.0" layoutY="-2.0" stroke="BLACK" strokeType="OUTSIDE" width="1046.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="175.0" layoutX="456.0" layoutY="74.0" stroke="#0000001f" strokeType="INSIDE" width="563.0" />
+        <JFXButton layoutX="-1.0" layoutY="3.0" prefHeight="26.0" prefWidth="83.0" text="Dashboard" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </JFXButton>
+        <JFXButton layoutX="82.0" layoutY="2.0" prefHeight="26.0" prefWidth="83.0" text="Reservation" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </JFXButton>
+        <JFXButton layoutX="167.0" layoutY="3.0" prefHeight="26.0" prefWidth="83.0" text="Inventory" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </JFXButton>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="41.0" layoutX="-1.0" layoutY="28.0" stroke="#00000061" strokeType="OUTSIDE" width="1046.0" />
+        <ImageView fx:id="img" fitHeight="182.0" fitWidth="263.0" layoutX="457.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fitHeight="39.0" fitWidth="40.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../img/sphere-7411325_1920.png" />
+            </image>
+        </ImageView>
+        <Label layoutX="46.0" layoutY="39.0" text="Reservation">
+            <font>
+                <Font name="SansSerif Bold" size="15.0" />
+            </font>
+        </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="87.0" layoutX="33.0" layoutY="109.0" stroke="#0000002f" strokeType="INSIDE" width="393.0" />
+      <TextField layoutX="41.0" layoutY="137.0" promptText="Room Number" />
+      <Button layoutX="209.0" layoutY="137.0" mnemonicParsing="false" onAction="#btn" style="-fx-background-color: #1e266e;" text="Search" textFill="WHITE" />
+      <Label layoutX="271.0" layoutY="141.0" prefHeight="18.0" prefWidth="74.0" text="Avilibility :">
+         <font>
+            <Font name="SansSerif Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="avlible" layoutX="347.0" layoutY="141.0" prefHeight="18.0" prefWidth="74.0">
+         <font>
+            <Font name="SansSerif Bold" size="14.0" />
+         </font>
+      </Label>
+      <Text fx:id="title" fontSmoothingType="LCD" layoutX="732.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="167.60000000000002">
+         <font>
+            <Font name="Segoe UI Bold" size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="price" fontSmoothingType="LCD" layoutX="902.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="107.19999999999999">
+         <font>
+            <Font name="Segoe UI Bold" size="17.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="325.0" layoutX="24.0" layoutY="258.0" stroke="#00000037" strokeType="INSIDE" width="275.0" />
+      <TextArea fx:id="description" layoutX="732.0" layoutY="103.0" prefHeight="135.0" prefWidth="275.0" style="-fx-background-color: 0.0.0;">
+         <font>
+            <Font name="SansSerif Regular" size="12.0" />
+         </font>
+      </TextArea>
+      <TextField layoutX="41.0" layoutY="284.0" promptText="Customer Name" />
+      <TextField layoutX="41.0" layoutY="321.0" promptText="Customer ID" />
+      <TextField layoutX="41.0" layoutY="358.0" promptText="Customer phone number" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="264.0" layoutX="487.0" layoutY="258.0" stroke="#00000037" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="245.0" />
+      <Label layoutX="501.0" layoutY="275.0" prefHeight="18.0" prefWidth="74.0" text="Adults">
+         <font>
+            <Font name="SansSerif Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="501.0" layoutY="309.0" prefHeight="18.0" prefWidth="74.0" text="Children">
+         <font>
+            <Font name="SansSerif Bold" size="14.0" />
+         </font>
+      </Label>
+    </children>
+
+</AnchorPane>
