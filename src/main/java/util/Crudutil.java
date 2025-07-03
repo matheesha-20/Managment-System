@@ -17,7 +17,7 @@ public class Crudutil {
         if(sql.startsWith("SELECT")||sql.startsWith("select")){
             return (X) psTm.executeQuery();
         }
-        return (X) (Boolean) (psTm.executeUpdate()>0);
+        return (X) (Integer) (psTm.executeUpdate());
 
     }
 }

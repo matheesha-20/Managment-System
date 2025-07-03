@@ -1,4 +1,4 @@
-package model;
+package dto;
 
 import lombok.*;
 
@@ -13,6 +13,5 @@ public class Room {
     private String roomName;
     private String roomType;
     private double roomPrice;
-    private String roomimg;
-    private int roomStatus;
+    private String roomStatus;
 }

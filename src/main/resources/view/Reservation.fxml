@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -10,8 +12,8 @@
 <AnchorPane prefHeight="618.0" prefWidth="1046.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Resrvationcontroller">
 
     <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dededc" height="548.0" layoutY="70.0" stroke="BLACK" strokeType="INSIDE" width="1048.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#04144b" height="32.0" layoutX="-1.0" layoutY="-2.0" stroke="BLACK" strokeType="OUTSIDE" width="1046.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dededc" height="548.0" layoutY="70.0" stroke="BLACK" strokeType="INSIDE" width="1049.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#04144b" height="34.0" layoutX="-1.0" layoutY="-1.0" stroke="BLACK" strokeType="OUTSIDE" width="1050.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="175.0" layoutX="456.0" layoutY="74.0" stroke="#0000001f" strokeType="INSIDE" width="563.0" />
         <JFXButton layoutX="-1.0" layoutY="3.0" prefHeight="26.0" prefWidth="83.0" text="Dashboard" textFill="WHITE">
             <font>
@@ -28,9 +30,9 @@
                 <Font name="System Bold" size="12.0" />
             </font>
         </JFXButton>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="41.0" layoutX="-1.0" layoutY="28.0" stroke="#00000061" strokeType="OUTSIDE" width="1046.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="-3.0" layoutY="30.0" stroke="#00000061" strokeType="OUTSIDE" width="1052.0" />
         <ImageView fx:id="img" fitHeight="182.0" fitWidth="263.0" layoutX="457.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fitHeight="39.0" fitWidth="40.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="43.0" fitWidth="54.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../img/sphere-7411325_1920.png" />
             </image>
@@ -40,15 +42,13 @@
                 <Font name="SansSerif Bold" size="15.0" />
             </font>
         </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="87.0" layoutX="33.0" layoutY="109.0" stroke="#0000002f" strokeType="INSIDE" width="393.0" />
-      <TextField layoutX="41.0" layoutY="137.0" promptText="Room Number" />
-      <Button layoutX="209.0" layoutY="137.0" mnemonicParsing="false" onAction="#btn" style="-fx-background-color: #1e266e;" text="Search" textFill="WHITE" />
-      <Label layoutX="271.0" layoutY="141.0" prefHeight="18.0" prefWidth="74.0" text="Avilibility :">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="116.0" layoutX="33.0" layoutY="109.0" stroke="#0000002f" strokeType="INSIDE" width="393.0" />
+      <Label layoutX="253.0" layoutY="141.0" prefHeight="18.0" prefWidth="74.0" text="Avilibility :">
          <font>
             <Font name="SansSerif Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="avlible" layoutX="347.0" layoutY="141.0" prefHeight="18.0" prefWidth="74.0">
+      <Label fx:id="avlible" layoutX="339.0" layoutY="143.0" prefHeight="18.0" prefWidth="74.0">
          <font>
             <Font name="SansSerif Bold" size="14.0" />
          </font>
@@ -63,24 +63,114 @@
             <Font name="Segoe UI Bold" size="17.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="325.0" layoutX="24.0" layoutY="258.0" stroke="#00000037" strokeType="INSIDE" width="275.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="352.0" layoutX="24.0" layoutY="258.0" stroke="#00000037" strokeType="INSIDE" width="275.0" />
       <TextArea fx:id="description" layoutX="732.0" layoutY="103.0" prefHeight="135.0" prefWidth="275.0" style="-fx-background-color: 0.0.0;">
          <font>
             <Font name="SansSerif Regular" size="12.0" />
          </font>
       </TextArea>
-      <TextField layoutX="41.0" layoutY="284.0" promptText="Customer Name" />
-      <TextField layoutX="41.0" layoutY="321.0" promptText="Customer ID" />
-      <TextField layoutX="41.0" layoutY="358.0" promptText="Customer phone number" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="264.0" layoutX="487.0" layoutY="258.0" stroke="#00000037" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="245.0" />
-      <Label layoutX="501.0" layoutY="275.0" prefHeight="18.0" prefWidth="74.0" text="Adults">
+      <TextField fx:id="cname" disable="true" layoutX="41.0" layoutY="316.0" prefHeight="26.0" prefWidth="241.0" promptText="Customer Name" />
+      <TextField fx:id="cpn" disable="true" layoutX="41.0" layoutY="357.0" prefHeight="26.0" prefWidth="242.0" promptText="Customer Phone Number" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="97.0" layoutX="332.0" layoutY="261.0" stroke="#00000037" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="168.0" />
+      <Label layoutX="344.0" layoutY="279.0" prefHeight="18.0" prefWidth="74.0" text="Adults">
          <font>
             <Font name="SansSerif Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="501.0" layoutY="309.0" prefHeight="18.0" prefWidth="74.0" text="Children">
+      <Label layoutX="345.0" layoutY="314.0" prefHeight="18.0" prefWidth="74.0" text="Children">
          <font>
             <Font name="SansSerif Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="roomnum" disable="true" layoutX="41.0" layoutY="394.0" prefHeight="26.0" prefWidth="242.0" promptText="Room Number" />
+      <TextField fx:id="checkin" layoutX="42.0" layoutY="430.0" prefHeight="26.0" prefWidth="242.0" promptText="Check-in" />
+      <TextField fx:id="checkout" layoutX="42.0" layoutY="467.0" prefHeight="26.0" prefWidth="242.0" promptText="Check-out" />
+      <Button layoutX="110.0" layoutY="519.0" mnemonicParsing="false" onAction="#add" prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: #039e22;" text="ADD" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="204.0" layoutY="519.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="83.0" style="-fx-background-color: #ed930c;" text="CANCEL" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <TextField fx:id="adults" layoutX="433.0" layoutY="275.0" prefHeight="18.0" prefWidth="40.0" />
+      <TextField fx:id="childern" layoutX="433.0" layoutY="310.0" prefHeight="18.0" prefWidth="40.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="97.0" layoutX="333.0" layoutY="459.0" stroke="#00000037" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="168.0" />
+      <Label fx:id="pri" layoutX="368.0" layoutY="495.0" prefHeight="52.0" prefWidth="96.0">
+         <font>
+            <Font name="SansSerif Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="344.0" layoutY="472.0" prefHeight="18.0" prefWidth="74.0" text="PRICE">
+         <font>
+            <Font name="SansSerif Bold" size="14.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="332.0" layoutY="371.0" stroke="#00000037" strokeLineCap="BUTT" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="170.0" />
+        <ComboBox fx:id="status" layoutX="341.0" layoutY="381.0" onAction="#clickstatus" prefWidth="150.0" promptText="STATUS">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Confirmed" />
+                    <String fx:value="Pending" />
+                    <String fx:value="Cancelled" />
+                    <String fx:value="Completed" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+      <Button layoutX="874.0" layoutY="1.0" mnemonicParsing="false" onAction="#homebtn" style="-fx-background-color: #1e266e;" text="Home" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="cusid" layoutX="41.0" layoutY="276.0" onAction="#cusidclick" prefHeight="25.0" prefWidth="241.0" promptText="Customer ID Number" />
+      <Button layoutX="68.0" layoutY="179.0" mnemonicParsing="false" onAction="#selectbtn" style="-fx-background-color: #039e22;" text="Select" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="161.0" layoutY="179.0" mnemonicParsing="false" onAction="#cancbtn" style="-fx-background-color: #ed930c;" text="Cancel" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="329.0" layoutX="533.0" layoutY="274.0" stroke="#0000002e" strokeType="INSIDE" width="485.0" />
+      <ComboBox fx:id="roomid" layoutX="67.0" layoutY="138.0" onAction="#roomidclick" prefWidth="150.0" promptText="Room Number">
+      </ComboBox>
+      <Button layoutX="569.0" layoutY="535.0" mnemonicParsing="false" onAction="#addnewcus" prefHeight="26.0" prefWidth="127.0" style="-fx-background-color: #13668a;" text="Add new Customer" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="741.0" layoutY="536.0" mnemonicParsing="false" onAction="#upcusbtn" prefHeight="26.0" prefWidth="127.0" style="-fx-background-color: #db9d0d;" text="Update Customer" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <TextField fx:id="cusidn" disable="true" layoutX="574.0" layoutY="315.0" prefHeight="26.0" prefWidth="241.0" promptText="Customer ID Number" />
+      <TextField fx:id="cusnamn" layoutX="574.0" layoutY="354.0" prefHeight="26.0" prefWidth="241.0" promptText="Customer Name" />
+      <TextField fx:id="cusphn" layoutX="574.0" layoutY="393.0" prefHeight="26.0" prefWidth="241.0" promptText="Customer Phone Number" />
+      <TextField fx:id="cusemil" layoutX="574.0" layoutY="432.0" prefHeight="26.0" prefWidth="241.0" promptText="Customer Email" />
+      <TextField fx:id="cusaddress" layoutX="574.0" layoutY="472.0" prefHeight="26.0" prefWidth="241.0" promptText="Customer Address" />
+      <Label layoutX="837.0" layoutY="312.0" prefHeight="36.0" prefWidth="86.0" text="Loyal Points">
+         <font>
+            <Font name="SansSerif Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="loyalp" layoutX="932.0" layoutY="312.0" prefHeight="36.0" prefWidth="74.0">
+         <font>
+            <Font name="SansSerif Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="date" layoutX="204.0" layoutY="47.0" prefHeight="19.0" prefWidth="127.0" style="-fx-background-color: white;">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="time" layoutX="359.0" layoutY="47.0" prefHeight="19.0" prefWidth="107.0" style="-fx-background-color: white;">
+         <font>
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
     </children>
