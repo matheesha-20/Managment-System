@@ -22,7 +22,7 @@ public class CustomerServiceimpl implements CustomerService {
     }
 
     @Override
-    public int updateCustomer(Customer customer) throws SQLException {
+    public Integer updateCustomer(Customer customer) throws SQLException {
         String sql = """
         UPDATE customer
         SET Name = ?, Email = ?, PhoneNumber = ?, Address = ?, Loyalpoints = ?

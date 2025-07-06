@@ -36,8 +36,14 @@ public class RoomServiceimpl implements RoomService {
                     resultSet.getInt("room_number"),
                     resultSet.getString("room_type"),
                     resultSet.getString("capacity"),
-                    resultSet.getDouble("price"),
-                    resultSet.getString("status")
+                    resultSet.getDouble("price_adult"),
+                    resultSet.getDouble("price_children"),
+                    resultSet.getString("status"),
+                    resultSet.getString("description"),
+                    resultSet.getBoolean("has_ac"),
+                    resultSet.getBoolean("has_wifi"),
+                    resultSet.getBoolean("has_bathroom"),
+                    resultSet.getBoolean("has_tv")
             );
         }
         return null;
@@ -52,8 +58,14 @@ public class RoomServiceimpl implements RoomService {
                     resultSet.getInt("room_number"),
                     resultSet.getString("room_type"),
                     resultSet.getString("capacity"),
-                    resultSet.getDouble("price"),
-                    resultSet.getString("status")
+                    resultSet.getDouble("price_adult"),
+                    resultSet.getDouble("price_children"),
+                    resultSet.getString("status"),
+                    resultSet.getString("description"),
+                    resultSet.getBoolean("has_ac"),
+                    resultSet.getBoolean("has_wifi"),
+                    resultSet.getBoolean("has_bathroom"),
+                    resultSet.getBoolean("has_tv")
             ));
         }
         return roomArrayList;

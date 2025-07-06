@@ -9,10 +9,7 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -32,6 +29,7 @@ import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -51,6 +49,11 @@ public class Resrvationcontroller implements Initializable {
     public Label date;
     public Label time;
     public TextField cusaddress;
+    public CheckBox air;
+    public CheckBox bath;
+    public CheckBox tv;
+    public CheckBox wifi;
+
     Connection connection =DBConnection.getInstance().getConnection();
     List <Reservation> reservationlist = new ArrayList<>();
 
@@ -58,14 +61,13 @@ public class Resrvationcontroller implements Initializable {
     public Label avlible;
     public Text title;
     public Text price;
-    public TextArea description;
+    public Label description;
     public Label pri;
-    public TextField childern;
-    public TextField adults;
+    public TextField Children;
+    public TextField adult;
     public TextField roomnum;
     public TextField checkout;
     public TextField cname;
-    public TextField cid;
     public TextField cpn;
     public TextField checkin;
     public ComboBox status;
@@ -78,45 +80,23 @@ public class Resrvationcontroller implements Initializable {
     public Resrvationcontroller() throws SQLException {
     }
 
-    public void setImg(ImageView img) {
-        img.getImage();
-    }
-
-
-    public void btn(ActionEvent actionEvent) throws SQLException {
-
-
-        ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM customer");
-        while (resultSet.next()) {
-            System.out.print(resultSet.getString(1));
-            System.out.print(resultSet.getString(2));
-            System.out.print(resultSet.getString(3));
-            System.out.print(resultSet.getString(4));
-            System.out.print(resultSet.getString(5));
-            System.out.print(resultSet.getString(6));
-            System.out.println(resultSet.getString(7));
-        }
-
-
-    }
-
-
     public void add(ActionEvent actionEvent) throws SQLException {
-        Integer rid = 0;
-        String id = cid.getText();
-        String name = cname.getText();
-        String phone = cpn.getText();
+
+        String id = (String) cusid.getValue();
         String roomnum = this.roomnum.getText();
-        String adults = this.adults.getText();
-        String children = this.childern.getText();
-        LocalDate checkin = LocalDate.parse(this.checkin.getText());
-        LocalDate checkout = LocalDate.parse(this.checkout.getText());
-        String status = this.status.getValue().toString();
-        double price = 0;
+        Integer adults = Integer.valueOf(adult.getText());
+        Integer children = Integer.valueOf(Children.getText());
+        LocalDate Checkin = LocalDate.parse(checkin.getText());
+        LocalDate Checkout = LocalDate.parse(checkout.getText());
+        String Status = status.getValue().toString();
+
+        double price = reservationservice.pricecaculate(adults,children,roomservice.searchRoom(roomnum).getRoomPrice_adults(),roomservice.searchRoom(roomnum).getRoomPrice_children(), ChronoUnit.DAYS.between(Checkin,Checkout));
+
+        pri.setText(String.format("€%.2f", price));
 
 
-        Reservation reservation=new Reservation(rid,id,roomnum,checkin,checkout,price,status);
-        reservationlist.add(reservation);
+        Reservation reservation=new Reservation(id,roomnum,Checkin,Checkout,price,Status,adults,children);
+        reservationservice.addreservation(reservation);
 
 
 
@@ -150,7 +130,18 @@ public class Resrvationcontroller implements Initializable {
          Random r = new Random();
         Image image = roomservice.setimage(r.nextInt(2));
 
+        img.setFitWidth(250);
+        img.setFitHeight(175);
+        img.setPreserveRatio(false);
         img.setImage(image);
+        title.setText(roomservice.searchRoom((String) roomid.getValue()).getRoomName());
+        description.setWrapText(true);
+        description.setMaxWidth(200);
+        description.setText(roomservice.searchRoom((String) roomid.getValue()).getDescription());
+        air.setSelected(roomservice.searchRoom((String) roomid.getValue()).getHas_ac());
+        bath.setSelected(roomservice.searchRoom((String) roomid.getValue()).getHas_bathroom());
+        wifi.setSelected(roomservice.searchRoom((String) roomid.getValue()).getHas_wifi());
+        tv.setSelected(roomservice.searchRoom((String) roomid.getValue()).getHas_tv());
     }
 
     public void cancbtn(ActionEvent actionEvent) {
