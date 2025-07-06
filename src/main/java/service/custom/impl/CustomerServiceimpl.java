@@ -12,8 +12,18 @@ import java.util.List;
 public class CustomerServiceimpl implements CustomerService {
 
     @Override
-    public boolean addCustomer(Customer customer) {
-        return false;
+    public boolean addCustomer(Customer customer) throws SQLException {     String sql = """
+        INSERT INTO customer (?,?,?,?,?,?)
+    """;
+
+        return Crudutil.execute(sql,
+                customer.getNic(),
+                customer.getName(),
+                customer.getEmail(),
+                customer.getPhone(),
+                customer.getAddress(),
+                customer.getLoyalpoints()
+        );
     }
 
     @Override
@@ -25,11 +35,12 @@ public class CustomerServiceimpl implements CustomerService {
     public Integer updateCustomer(Customer customer) throws SQLException {
         String sql = """
         UPDATE customer
-        SET Name = ?, Email = ?, PhoneNumber = ?, Address = ?, Loyalpoints = ?
+        SET CustomerNIC = ?, Name = ?, Email = ?, PhoneNumber = ?, Address = ?, Loyalpoints = ?
         WHERE CustomerID = ?
     """;
 
         return Crudutil.execute(sql,
+                customer.getNic(),
                 customer.getName(),
                 customer.getEmail(),
                 customer.getPhone(),
@@ -42,10 +53,11 @@ public class CustomerServiceimpl implements CustomerService {
     @Override
     public Customer searchCustomer(String id) throws SQLException {
 
-        ResultSet resultSet = Crudutil.execute("SELECT * FROM customer WHERE CustomerID=?", id);
+        ResultSet resultSet = Crudutil.execute("SELECT * FROM customer WHERE CustomerNIC=?", id);
         while (resultSet.next()) {
            return new Customer(
                     resultSet.getString("CustomerID"),
+                    resultSet.getString("CustomerNIC"),
                     resultSet.getString("Name"),
                     resultSet.getString("Email"),
                     resultSet.getString("PhoneNumber"),
@@ -63,6 +75,7 @@ public class CustomerServiceimpl implements CustomerService {
         while (resultSet.next()) {
             customerArrayList.add(new Customer(
                     resultSet.getString("CustomerID"),
+                    resultSet.getString("CustomerNIC"),
                     resultSet.getString("Name"),
                     resultSet.getString("Email"),
                     resultSet.getString("PhoneNumber"),
@@ -81,5 +94,15 @@ public class CustomerServiceimpl implements CustomerService {
             customerIdList.add(customer.getId());
         });
         return customerIdList;
+    }
+
+    @Override
+    public List<String> getCustomerNICs() throws SQLException {
+        List<Customer> all = getAll();
+        ArrayList<String> customerNICList = new ArrayList<>();
+        all.forEach(customer->{
+            customerNICList.add(customer.getNic());
+        });
+        return customerNICList;
     }
 }

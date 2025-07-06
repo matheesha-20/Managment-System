@@ -39,9 +39,9 @@ import static javafx.scene.image.Image.*;
 
 public class Resrvationcontroller implements Initializable {
 
-    public ComboBox cusid;
+    public ComboBox cusnic;
     public ComboBox roomid;
-    public TextField cusidn;
+    public TextField cusnicn;
     public TextField cusnamn;
     public TextField cusphn;
     public TextField cusemil;
@@ -53,6 +53,8 @@ public class Resrvationcontroller implements Initializable {
     public CheckBox bath;
     public CheckBox tv;
     public CheckBox wifi;
+    public Label priadul;
+    public Label prichild;
 
     Connection connection =DBConnection.getInstance().getConnection();
     List <Reservation> reservationlist = new ArrayList<>();
@@ -71,6 +73,7 @@ public class Resrvationcontroller implements Initializable {
     public TextField cpn;
     public TextField checkin;
     public ComboBox status;
+    double Price;
 
     CustomerService customerservice = ServiceFactory.getInstance().getServiceType(ServiceType.CUSTOMER);
     RoomService roomservice = ServiceFactory.getInstance().getServiceType(ServiceType.ROOM);
@@ -82,7 +85,7 @@ public class Resrvationcontroller implements Initializable {
 
     public void add(ActionEvent actionEvent) throws SQLException {
 
-        String id = (String) cusid.getValue();
+        String nic = (String) cusnic.getValue();
         String roomnum = this.roomnum.getText();
         Integer adults = Integer.valueOf(adult.getText());
         Integer children = Integer.valueOf(Children.getText());
@@ -90,12 +93,12 @@ public class Resrvationcontroller implements Initializable {
         LocalDate Checkout = LocalDate.parse(checkout.getText());
         String Status = status.getValue().toString();
 
-        double price = reservationservice.pricecaculate(adults,children,roomservice.searchRoom(roomnum).getRoomPrice_adults(),roomservice.searchRoom(roomnum).getRoomPrice_children(), ChronoUnit.DAYS.between(Checkin,Checkout));
+        Price = reservationservice.pricecaculate(adults,children,roomservice.searchRoom(roomnum).getRoomPrice_adults(),roomservice.searchRoom(roomnum).getRoomPrice_children(), ChronoUnit.DAYS.between(Checkin,Checkout));
 
-        pri.setText(String.format("€%.2f", price));
+        pri.setText(String.format("€%.2f", Price));
 
 
-        Reservation reservation=new Reservation(id,roomnum,Checkin,Checkout,price,Status,adults,children);
+        Reservation reservation=new Reservation(customerservice.searchCustomer((String) cusnic.getValue()).getId(),roomnum,Checkin,Checkout,Price,Status,adults,children);
         reservationservice.addreservation(reservation);
 
 
@@ -112,8 +115,8 @@ public class Resrvationcontroller implements Initializable {
     public void cancel(ActionEvent actionEvent) {
     }
 
-    public void cusidclick(ActionEvent actionEvent) {
-        cusid.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+    public void cusnicclick(ActionEvent actionEvent) {
+        cusnic.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 setvalusetocustomertext((String) newValue);
             } catch (SQLException e) {
@@ -130,8 +133,8 @@ public class Resrvationcontroller implements Initializable {
          Random r = new Random();
         Image image = roomservice.setimage(r.nextInt(2));
 
-        img.setFitWidth(250);
-        img.setFitHeight(175);
+        img.setFitWidth(263);
+        img.setFitHeight(204);
         img.setPreserveRatio(false);
         img.setImage(image);
         title.setText(roomservice.searchRoom((String) roomid.getValue()).getRoomName());
@@ -142,6 +145,8 @@ public class Resrvationcontroller implements Initializable {
         bath.setSelected(roomservice.searchRoom((String) roomid.getValue()).getHas_bathroom());
         wifi.setSelected(roomservice.searchRoom((String) roomid.getValue()).getHas_wifi());
         tv.setSelected(roomservice.searchRoom((String) roomid.getValue()).getHas_tv());
+        priadul.setText(String.valueOf(roomservice.searchRoom((String) roomid.getValue()).getRoomPrice_adults()));
+        prichild.setText(String.valueOf(roomservice.searchRoom((String) roomid.getValue()).getRoomPrice_children()));
     }
 
     public void cancbtn(ActionEvent actionEvent) {
@@ -155,13 +160,15 @@ public class Resrvationcontroller implements Initializable {
 
     public void upcusbtn(ActionEvent actionEvent) throws SQLException {
         Customer customer = new Customer(
-            cusidn.getText(),
+            customerservice.searchCustomer((String) cusnic.getValue()).getId(),
+            cusnicn.getText(),
             cusnamn.getText(),
             cusemil.getText(),
             cusphn.getText(),
             cusaddress.getText(),
-            Integer.parseInt(loyalp.getText())
-    );
+                (int) (Integer.parseInt(loyalp.getText())+(Price/10))
+        );
+        loyalp.setText(String.valueOf(Integer.parseInt(loyalp.getText())+(Price/10)));
         customerservice.updateCustomer(customer);
     }
 
@@ -182,8 +189,8 @@ public class Resrvationcontroller implements Initializable {
     }
 
     private void loadcusids() throws SQLException {
-        List<String> cusids = customerservice.getCustomerIDs();
-        cusid.setItems(FXCollections.observableArrayList(cusids));
+        List<String> cusids = customerservice.getCustomerNICs();
+        cusnic.setItems(FXCollections.observableArrayList(cusids));
     }
 
     private void loadroomids() throws SQLException {
@@ -202,7 +209,7 @@ public class Resrvationcontroller implements Initializable {
             throw new RuntimeException(e);
         }
 
-        cusid.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        cusnic.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 setvalusetocustomertext((String) newValue);
             } catch (SQLException e) {
@@ -221,7 +228,7 @@ public class Resrvationcontroller implements Initializable {
 
     private void setvalusetocustomertext(String cusid) throws SQLException {
         Customer customer = customerservice.searchCustomer(cusid);
-        cusidn.setText(customer.getId());
+        cusnicn.setText(customer.getNic());
         cname.setText(customer.getName());
         cusnamn.setText(customer.getName());
         cpn.setText(customer.getPhone());

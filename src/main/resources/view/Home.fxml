@@ -21,7 +21,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="167.0" layoutY="3.0" prefHeight="26.0" prefWidth="83.0" text="Inventory" textFill="WHITE">
+      <JFXButton layoutX="225.0" layoutY="3.0" prefHeight="26.0" prefWidth="83.0" text="Inventory" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -43,5 +43,10 @@
             <Font name="SansSerif Bold" size="15.0" />
          </font>
       </Label>
+      <JFXButton layoutX="157.0" layoutY="3.0" onAction="#clickcusbtn" prefHeight="26.0" prefWidth="83.0" text="Customer" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

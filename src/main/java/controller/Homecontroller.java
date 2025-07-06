@@ -13,4 +13,8 @@ public class Homecontroller {
     Starter.switchscne("/view/Reservation.fxml");
 
     }
+
+    public void clickcusbtn(ActionEvent actionEvent) throws IOException {
+        Starter.switchscne("/view/Customerform.fxml");
+    }
 }
