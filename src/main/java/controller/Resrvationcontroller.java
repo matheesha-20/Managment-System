@@ -8,12 +8,17 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import dto.Reservation;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import service.ServiceFactory;
 import service.custom.CustomerService;
@@ -55,6 +60,9 @@ public class Resrvationcontroller implements Initializable {
     public CheckBox wifi;
     public Label priadul;
     public Label prichild;
+    public SplitMenuButton split;
+    public DatePicker checkin;
+    public TextField cNIC;
 
     Connection connection =DBConnection.getInstance().getConnection();
     List <Reservation> reservationlist = new ArrayList<>();
@@ -71,7 +79,7 @@ public class Resrvationcontroller implements Initializable {
     public TextField checkout;
     public TextField cname;
     public TextField cpn;
-    public TextField checkin;
+
     public ComboBox status;
     double Price;
 
@@ -89,7 +97,7 @@ public class Resrvationcontroller implements Initializable {
         String roomnum = this.roomnum.getText();
         Integer adults = Integer.valueOf(adult.getText());
         Integer children = Integer.valueOf(Children.getText());
-        LocalDate Checkin = LocalDate.parse(checkin.getText());
+        LocalDate Checkin = LocalDate.parse(String.valueOf(checkin.getValue()));
         LocalDate Checkout = LocalDate.parse(checkout.getText());
         String Status = status.getValue().toString();
 
@@ -149,13 +157,23 @@ public class Resrvationcontroller implements Initializable {
         prichild.setText(String.valueOf(roomservice.searchRoom((String) roomid.getValue()).getRoomPrice_children()));
     }
 
-    public void cancbtn(ActionEvent actionEvent) {
+    public void cancbtn(ActionEvent actionEvent) throws IOException {
     }
 
     public void roomidclick(ActionEvent actionEvent) {
     }
 
-    public void addnewcus(ActionEvent actionEvent) {
+    public void addnewcus(ActionEvent actionEvent) throws SQLException {
+        Customer customer = new Customer(
+                "0",
+                cusnicn.getText(),
+                cusnamn.getText(),
+                cusemil.getText(),
+                cusphn.getText(),
+                cusaddress.getText(),
+                10
+        );
+        customerservice.addCustomer(customer);
     }
 
     public void upcusbtn(ActionEvent actionEvent) throws SQLException {
@@ -166,9 +184,9 @@ public class Resrvationcontroller implements Initializable {
             cusemil.getText(),
             cusphn.getText(),
             cusaddress.getText(),
-                (int) (Integer.parseInt(loyalp.getText())+(Price/10))
+                (Integer.parseInt(loyalp.getText()))
         );
-        loyalp.setText(String.valueOf(Integer.parseInt(loyalp.getText())+(Price/10)));
+
         customerservice.updateCustomer(customer);
     }
 
@@ -243,5 +261,21 @@ public class Resrvationcontroller implements Initializable {
 
         Room room = roomservice.searchRoom(roomid);
         avlible.setText(room.getRoomStatus());
+    }
+
+    public void filterbtn(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/filters.fxml"))));
+        stage.initStyle(StageStyle.UNIFIED);
+        stage.setTitle("FILTERS");
+        stage.initStyle(StageStyle.UTILITY);
+        stage.show();
+    }
+
+    public void searchbtn(ActionEvent actionEvent) {
+    }
+
+    public void searchcustomer(KeyEvent keyEvent) throws SQLException {
+        cname.setText(customerservice.searchCustomer(cNIC.getText()).getName());
     }
 }

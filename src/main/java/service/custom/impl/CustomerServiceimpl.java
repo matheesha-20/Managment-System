@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerServiceimpl implements CustomerService {
-
     @Override
-    public boolean addCustomer(Customer customer) throws SQLException {     String sql = """
-        INSERT INTO customer (?,?,?,?,?,?)
-    """;
+    public Boolean addCustomer(Customer customer) throws SQLException {    String sql = """
+    INSERT INTO customer (CustomerNIC, Name, Email, PhoneNumber, Address, LoyalPoints)
+    VALUES (?, ?, ?, ?, ?, ?)
+""";
 
         return Crudutil.execute(sql,
                 customer.getNic(),
@@ -32,7 +32,7 @@ public class CustomerServiceimpl implements CustomerService {
     }
 
     @Override
-    public Integer updateCustomer(Customer customer) throws SQLException {
+    public Boolean updateCustomer(Customer customer) throws SQLException {
         String sql = """
         UPDATE customer
         SET CustomerNIC = ?, Name = ?, Email = ?, PhoneNumber = ?, Address = ?, Loyalpoints = ?
@@ -54,8 +54,9 @@ public class CustomerServiceimpl implements CustomerService {
     public Customer searchCustomer(String id) throws SQLException {
 
         ResultSet resultSet = Crudutil.execute("SELECT * FROM customer WHERE CustomerNIC=?", id);
+
         while (resultSet.next()) {
-           return new Customer(
+            return  new Customer(
                     resultSet.getString("CustomerID"),
                     resultSet.getString("CustomerNIC"),
                     resultSet.getString("Name"),

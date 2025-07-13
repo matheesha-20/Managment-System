@@ -18,7 +18,7 @@ public class Crudutil {
             return (X) psTm.executeQuery();
 
         }
-        return (X) (Integer) psTm.executeUpdate();
+        return (X) (Boolean) (psTm.executeUpdate()>0);
 
     }
 }
